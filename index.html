@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Roshan Ray | IT Systems Administrator</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+
+  <main class="container">
+
+    <!-- HERO SECTION -->
+    <section class="hero-intro">
+      <div class="hero-text">
+        <h1>Hi, I'm Roshan 👋</h1>
+        <p>
+          I'm passionate about building reliable systems, automating workflows, and solving real infrastructure
+          problems.
+        </p>
+      </div>
+
+      <div class="hero-avatar">
+        <img src="assets/Roshan-Ray.jpg" alt="Roshan" />
+      </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section class="about">
+      <h2>About</h2>
+      <p>
+        Roshan is an IT Systems Administrator with hands-on experience in Linux, Active Directory, Office 365, and
+        cloud-based services. He focuses on building reliable systems, automating repetitive workflows, and writing
+        clear technical documentation. He has supported enterprise users, handled escalations, and worked closely with
+        teams to improve system stability and operational efficiency.
+      </p>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="contact">
+      <div class="contact-header">
+        <span class="contact-tag">Contact</span>
+        <h2 id="contact">Get in Touch</h2>
+        <p>
+          Best way to reach me is through <a href="mailto:rairoshan88@gmail.com">email</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- FLOATING DOCK -->
+    <nav class="dock-container">
+      <div class="dock">
+        <a href="https://roshanray.com/" class="dock-item" aria-label="Home">
+          <i data-lucide="house"></i>
+        </a>
+        <a href="https://roshanray.com/blog" class="dock-item" aria-label="Writing">
+          <i data-lucide="notebook"></i>
+        </a>
+        <div class="dock-separator"></div>
+        <a href="https://github.com/rairoshan88" target="_blank" class="dock-item" aria-label="GitHub">
+          <i data-lucide="github"></i>
+        </a>
+        <a href="https://linkedin.com/in/rairoshan88" target="_blank" class="dock-item" aria-label="LinkedIn">
+          <i data-lucide="linkedin"></i>
+        </a>
+        <a href="https://twitter.com/rairoshan88" target="_blank" class="dock-item" aria-label="X">
+          <i data-lucide="twitter"></i>
+        </a>
+        <a href="assets/Resume.pdf" target="_blank" class="dock-item" aria-label="Resume">
+          <i data-lucide="file-text"></i>
+        </a>
+        <div class="dock-separator"></div>
+        <button class="dock-item theme-toggle" id="theme-toggle" aria-label="Toggle Theme">
+          <i data-lucide="sun"></i>
+        </button>
+      </div>
+    </nav>
+
+  </main>
+
+  <script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+
+    // Theme Toggle Logic
+    const themeToggle = document.getElementById('theme-toggle');
+
+    // Check for saved theme preference
+    const currentTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    updateIcons(currentTheme);
+
+    themeToggle.addEventListener('click', () => {
+      const theme = document.documentElement.getAttribute('data-theme');
+      const newTheme = theme === 'light' ? 'dark' : 'light';
+
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      updateIcons(newTheme);
+    });
+
+    function updateIcons(theme) {
+      const iconContainer = themeToggle;
+      const newIconName = theme === 'dark' ? 'moon' : 'sun';
+      iconContainer.innerHTML = `<i data-lucide="${newIconName}"></i>`;
+      lucide.createIcons();
+    }
+  </script>
+</body>
+
+</html>

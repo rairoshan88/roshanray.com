@@ -1,0 +1,212 @@
+/* ---------- Reset & Base ---------- */
+:root {
+  --font-main: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --color-text-main: #000000;
+  --color-text-muted: #666666;
+  --color-link: #3b82f6;
+  --bg-color: #ffffff;
+  --dock-bg: rgba(255, 255, 255, 0.8);
+  --dock-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  --dock-border: rgba(0, 0, 0, 0.08);
+  --dock-item-hover: rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="dark"] {
+  --color-text-main: #f9fafb;
+  --color-text-muted: #9ca3af;
+  --color-link: #60a5fa;
+  --bg-color: #000000;
+  --dock-bg: rgba(31, 41, 55, 0.8);
+  --dock-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  --dock-border: rgba(255, 255, 255, 0.1);
+  --dock-item-hover: rgba(255, 255, 255, 0.1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body {
+  font-family: var(--font-main);
+  background: var(--bg-color);
+  color: var(--color-text-main);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -0.01em;
+}
+
+.container {
+  max-width: 700px;
+  /* Narrower container matches the image better */
+  margin: 0 auto;
+  padding: 100px 24px 200px;
+}
+
+/* ---------- Hero / Intro ---------- */
+.hero-intro {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  margin-bottom: 60px;
+}
+
+.hero-text h1 {
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  margin-bottom: 12px;
+}
+
+.hero-text p {
+  font-size: 1.25rem;
+  color: var(--color-text-main);
+  line-height: 1.4;
+  max-width: 480px;
+}
+
+.hero-avatar img {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #f3f4f6;
+}
+
+/* ---------- About ---------- */
+.about {
+  margin-bottom: 100px;
+}
+
+.about h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  letter-spacing: -0.02em;
+}
+
+.about p {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+}
+
+/* ---------- Contact ---------- */
+.contact {
+  text-align: center;
+  margin-bottom: 150px;
+}
+
+.contact-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.contact-tag {
+  display: inline-block;
+  padding: 4px 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  background: #000;
+  color: #fff;
+  border-radius: 8px;
+  margin-bottom: 24px;
+}
+
+.contact h2 {
+  font-size: 3.5rem;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  margin-bottom: 16px;
+}
+
+.contact p {
+  font-size: 1.25rem;
+  color: var(--color-text-muted);
+}
+
+.contact p a {
+  color: var(--color-link);
+  text-decoration: none;
+}
+
+.contact p a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Floating Dock ---------- */
+.dock-container {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+}
+
+.dock {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  background: var(--dock-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--dock-border);
+  border-radius: 24px;
+  box-shadow: var(--dock-shadow);
+}
+
+.dock-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.dock-item:hover {
+  background: var(--dock-item-hover);
+  color: var(--color-text-main);
+}
+
+.dock-item svg {
+  width: 20px;
+  height: 20px;
+  stroke-width: 2;
+}
+
+.dock-separator {
+  width: 1px;
+  height: 24px;
+  background: var(--dock-border);
+  margin: 0 4px;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 640px) {
+  .hero-intro {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    gap: 24px;
+  }
+
+  .hero-text h1 {
+    font-size: 2.5rem;
+  }
+
+  .contact h2 {
+    font-size: 2.5rem;
+  }
+}
