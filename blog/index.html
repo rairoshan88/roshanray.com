@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog | Roshan Ray</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="icon" type="image/png" href="../assets/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .blog-header {
+            margin-bottom: 60px;
+        }
+
+        .blog-header h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            margin-bottom: 12px;
+        }
+
+        .blog-header p {
+            font-size: 1.25rem;
+            color: var(--color-text-muted);
+        }
+
+        .post-list {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .post-item {
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding: 16px;
+            margin: -16px;
+            border-radius: 12px;
+            transition: background-color 0.2s ease;
+        }
+
+        .post-item:hover {
+            background-color: var(--dock-item-hover);
+        }
+
+        .post-date {
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+        }
+
+        .post-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-text-main);
+            letter-spacing: -0.02em;
+        }
+
+        .post-description {
+            font-size: 1rem;
+            color: var(--color-text-muted);
+            line-height: 1.5;
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="container">
+        <header class="blog-header">
+            <h1>Writing</h1>
+            <p>Thoughts on systems administration, automation, and tech.</p>
+        </header>
+
+        <section class="post-list">
+            <!-- Placeholder Blog Posts -->
+            <a href="#" class="post-item">
+                <span class="post-date">January 3, 2026</span>
+                <h2 class="post-title">Automating Active Directory with PowerShell</h2>
+                <p class="post-description">How I reduced user onboarding time by 80% using custom PowerShell scripts
+                    and scheduled tasks.</p>
+            </a>
+
+            <a href="#" class="post-item">
+                <span class="post-date">December 20, 2025</span>
+                <h2 class="post-title">Transitioning to a Paperless Office</h2>
+                <p class="post-description">Lessons learned from implementing cloud-based document management systems
+                    for enterprise clients.</p>
+            </a>
+
+            <a href="#" class="post-item">
+                <span class="post-date">November 15, 2025</span>
+                <h2 class="post-title">Linux Server Hardening Checklist</h2>
+                <p class="post-description">The essential steps I follow to secure every new Ubuntu server before
+                    deployment.</p>
+            </a>
+        </section>
+
+        <!-- FLOATING DOCK -->
+        <nav class="dock-container">
+            <div class="dock">
+                <a href="../index.html" class="dock-item" aria-label="Home">
+                    <i data-lucide="house"></i>
+                </a>
+                <a href="#" class="dock-item" aria-label="Writing">
+                    <i data-lucide="notebook"></i>
+                </a>
+                <div class="dock-separator"></div>
+                <a href="https://github.com/rairoshan88" target="_blank" class="dock-item" aria-label="GitHub">
+                    <i data-lucide="github"></i>
+                </a>
+                <a href="https://linkedin.com/in/rairoshan88" target="_blank" class="dock-item" aria-label="LinkedIn">
+                    <i data-lucide="linkedin"></i>
+                </a>
+                <a href="https://twitter.com/rairoshan88" target="_blank" class="dock-item" aria-label="X">
+                    <i data-lucide="twitter"></i>
+                </a>
+                <a href="../assets/Resume.pdf" target="_blank" class="dock-item" aria-label="Resume">
+                    <i data-lucide="file-text"></i>
+                </a>
+                <div class="dock-separator"></div>
+                <button class="dock-item theme-toggle" id="theme-toggle" aria-label="Toggle Theme">
+                    <i data-lucide="sun"></i>
+                </button>
+            </div>
+        </nav>
+    </main>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Theme Toggle Logic
+        const themeToggle = document.getElementById('theme-toggle');
+
+        // Check for saved theme preference
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', currentTheme);
+        updateIcons(currentTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const theme = document.documentElement.getAttribute('data-theme');
+            const newTheme = theme === 'light' ? 'dark' : 'light';
+
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcons(newTheme);
+        });
+
+        function updateIcons(theme) {
+            const iconContainer = themeToggle;
+            const newIconName = theme === 'dark' ? 'moon' : 'sun';
+            iconContainer.innerHTML = `<i data-lucide="${newIconName}"></i>`;
+            lucide.createIcons();
+        }
+    </script>
+</body>
+
+</html>
