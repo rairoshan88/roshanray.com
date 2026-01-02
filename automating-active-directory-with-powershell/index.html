@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Automating Active Directory with PowerShell | Roshan Ray</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="icon" type="image/png" href="../assets/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .article-header {
+            margin-bottom: 40px;
+        }
+
+        .article-header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            line-height: 1.1;
+            margin-bottom: 16px;
+        }
+
+        .article-meta {
+            font-size: 1rem;
+            color: var(--color-text-muted);
+            margin-bottom: 32px;
+        }
+
+        .article-content {
+            font-size: 1.125rem;
+            line-height: 1.8;
+            color: var(--color-text-main);
+        }
+
+        .article-content h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin: 40px 0 20px;
+            letter-spacing: -0.02em;
+        }
+
+        .article-content p {
+            margin-bottom: 24px;
+        }
+
+        .article-content pre {
+            background: #f4f4f4;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 24px;
+            border: 1px solid var(--dock-border);
+        }
+
+        [data-theme="dark"] .article-content pre {
+            background: #1f2937;
+        }
+
+        .article-content code {
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="container">
+        <article>
+            <header class="article-header">
+                <div class="article-meta">January 3, 2026 • 5 min read</div>
+                <h1>Automating Active Directory with PowerShell</h1>
+            </header>
+
+            <section class="article-content">
+                <p>In modern enterprise environments, manual user management is a relic of the past. As IT Systems
+                    Administrators, our goal is to build reliable, repeatable systems that reduce human error and free
+                    up our time for higher-level infrastructure problems.</p>
+
+                <p>In this guide, I'll show you how I reduced user onboarding time by 80% using custom PowerShell
+                    scripts and scheduled tasks. We'll cover the basics of the <code>ActiveDirectory</code> module and
+                    how to safely automate user creation.</p>
+
+                <h2>The Problem with Manual Entry</h2>
+                <p>Manually creating users in Active Directory is prone to typos, inconsistent attribute naming, and
+                    forgotten group memberships. When scaling from 10 to 100 users, these small errors become
+                    significant security risks and operational bottlenecks.</p>
+
+                <h2>Prerequisites</h2>
+                <p>Before we begin, ensure you have the RSAT (Remote Server Administration Tools) installed on your
+                    workstation and that you have the appropriate permissions to modify AD objects.</p>
+
+                <pre><code># Import the Active Directory module
+Import-Module ActiveDirectory</code></pre>
+
+                <h2>Automating User Creation</h2>
+                <p>The core of our automation relies on the <code>New-ADUser</code> cmdlet. By wrapping this in a
+                    function that reads from a CSV file, we can process dozens of users in seconds.</p>
+
+                <pre><code># Example: Simple User Creation
+New-ADUser -Name "John Doe" `
+           -SamAccountName "jdoe" `
+           -UserPrincipalName "jdoe@roshanray.com" `
+           -Path "OU=Users,OU=Department,DC=roshanray,DC=com" `
+           -AccountPassword (Read-Host -AsSecureString "Input Password") `
+           -Enabled $true</code></pre>
+
+                <h2>Moving Forward</h2>
+                <p>This is just the tip of the iceberg. True automation involves integrating with HR systems, setting up
+                    automated periodic audits, and implementing self-service password reset tools.</p>
+            </section>
+        </article>
+
+        <!-- FLOATING DOCK -->
+        <nav class="dock-container">
+            <div class="dock">
+                <a href="../index.html" class="dock-item" aria-label="Home">
+                    <i data-lucide="house"></i>
+                </a>
+                <a href="../blog/" class="dock-item" aria-label="Writing">
+                    <i data-lucide="notebook"></i>
+                </a>
+                <div class="dock-separator"></div>
+                <a href="https://github.com/rairoshan88" target="_blank" class="dock-item" aria-label="GitHub">
+                    <i data-lucide="github"></i>
+                </a>
+                <a href="https://linkedin.com/in/rairoshan88" target="_blank" class="dock-item" aria-label="LinkedIn">
+                    <i data-lucide="linkedin"></i>
+                </a>
+                <a href="https://twitter.com/rairoshan88" target="_blank" class="dock-item" aria-label="X">
+                    <i data-lucide="twitter"></i>
+                </a>
+                <a href="../assets/Resume.pdf" target="_blank" class="dock-item" aria-label="Resume">
+                    <i data-lucide="file-text"></i>
+                </a>
+                <div class="dock-separator"></div>
+                <button class="dock-item theme-toggle" id="theme-toggle" aria-label="Toggle Theme">
+                    <i data-lucide="sun"></i>
+                </button>
+            </div>
+        </nav>
+    </main>
+
+    <script>
+        lucide.createIcons();
+        const themeToggle = document.getElementById('theme-toggle');
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', currentTheme);
+        updateIcons(currentTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const theme = document.documentElement.getAttribute('data-theme');
+            const newTheme = theme === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcons(newTheme);
+        });
+
+        function updateIcons(theme) {
+            const iconContainer = themeToggle;
+            const newIconName = theme === 'dark' ? 'moon' : 'sun';
+            iconContainer.innerHTML = `<i data-lucide="${newIconName}"></i>`;
+            lucide.createIcons();
+        }
+    </script>
+</body>
+
+</html>
